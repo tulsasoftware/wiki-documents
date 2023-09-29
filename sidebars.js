@@ -2274,14 +2274,6 @@ const sidebars = {
             'Edge/reTerminal-DM/Embedded_ML/reTerminal-DM-edgeimpulse',
           ],
         },
-        {
-          type: 'category',
-          label: 'Ignition Edge',
-          items: [
-            'Edge/reTerminal-DM/Ignition_Edge/reTerminal-DM-Getting-Started-with-Ignition-Edge',
-            'Edge/reTerminal-DM/Ignition_Edge/reTerminal-DM-Ignition-Edge-Panel-Builder',
-          ],
-        },
       ],
     },
 
