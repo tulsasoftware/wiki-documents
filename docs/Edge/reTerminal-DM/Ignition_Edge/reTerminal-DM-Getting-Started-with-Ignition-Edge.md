@@ -23,21 +23,20 @@ last_update:
 
 <br />
 
-> Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
-> It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.
+> Capturing, processing, and visualizing critical data at the remote edge of the network can be difficult and expensive. Ignition Edge by Inductive Automation® is a line of limited, lightweight Ignition® software solutions designed specifically for devices used in the field and OEM devices at the edge of the network. With Ignition Edge, edge computing is easier and more affordable than ever, so you can extend your data collection, visualization, and system management all the way to the edge of your network.
 >
-> — nodered.org
+> — [inductiveautomation.com](https://inductiveautomation.com/ignition/edge)
 
-Since reTerminal DM is equipped with rich scalability and hybrid connectivity, such as Digital I/O, CAN bus, RS485, RS232 and powerful wireless communication capabilities such as WiFi, BLE, \*4G, \*LoRa®. Where Node-RED is one of the best low-code programming tool which could rule them all, and Thanks to the Node-RED Dashboard node which could be configured and utilised together with the 10.1" 10-point multi-touch high-sensitivity capacitive panel for the on-site Human Machine Interface purpose.
+Ignition Edge offers several products that can be mixed and matched on an edge device to create powerful solutions at the edge of the network:
+- **Ignition Edge IIoT**: Publish field-device data through MQTT.
+- **Ignition Edge Panel**: Create local HMIs for field devices.
+- **Ignition Edge Compute**: Add true edge computing to your network.
+- **Ignition Edge Sync Services**: Synchronize data from the edge of the network.
+- **Ignition Edge EAM**: Combine with other Edge products for central management.
+
+By embedding Ignition Edge into field and OEM devices at the edge of the network, you can extend Ignition all the way to the edge of your network. The reTerminal DM is equipped with rich scalability and hybrid connectivity, such as Digital I/O, CAN bus, RS485, RS232, powerful wireless communication capabilities such as WiFi, BLE, \*4G, \*LoRa® and 10.1" 10-point multi-touch high-sensitivity capacitive panel which makes it an excellent option to host any combination of the powerful apps from the Ignition Edge collection.
 
 > \*4G and LoRa® modules does not come with reTerminal DM by default, please purchase the relevant modules accordingly.
-
-Here is the getting started guide on how to setup, as well as getting familiar with the Node-RED interface together on reTerminal DM.
-
-:::tip
-* For **Raspbian OS** User Please Go TO: [Install Node-RED](#install-and-setting-up-node-red)
-* For **Sensecraft Edge OS** User Please Go TO: [Getting Familiar with Node-RED](#getting-familiar-with-node-red), Since Sensecraft Edge OS comes with Node-RED preinstalled
-:::
 
 ## Hardware Prerequisite
 - reTerminal DM x 1
@@ -46,9 +45,11 @@ Here is the getting started guide on how to setup, as well as getting familiar w
 - 12-24V DC power supply
 - Ethernet cable
 
-*This guide assumes your reTerminal DM is running a fresh install of Raspberry Pi OS(x64) with SSH terminal access from another client device. See [instructions to flash the ReTerminal DM operating system](https://wiki.seeedstudio.com/reterminal-dm-flash-OS/#steps-for-flashing-raspbian-os) if you require detailed instructions on this procedure.*
+:::note
+*This guide assumes your reTerminal DM is running a fresh install of Raspberry Pi OS(x64) with SSH terminal access from another client device. See [instructions to flash the reTerminal DM operating system](https://wiki.seeedstudio.com/reterminal-dm-flash-OS/#steps-for-flashing-raspbian-os) if you require detailed instructions on this procedure.*
+:::
 
-## Installing Ignition Edge On ReTerminal
+## Installing Ignition Edge On reTerminal
 
 To install Ignition Edge on your device is simple.
 
@@ -60,12 +61,12 @@ To install Ignition Edge on your device is simple.
 6. Modify permissions to execute the Ignition start script
 7. Launch the Igntion start script
 
-A convenience script has been written that follows these steps and does not require you to create a user login for Inductive Automation's site. To use it, you simply need to get the ignition edge download/install script. Once you've downloaded the script, mark it as executable and run it. You will need superuser credentials in order to create the necessary directories. Go ahead and grab a coffee, this will take a few minutes to install.
+A convenience script has been written that follows these steps and does not require you to create a user login for Inductive Automation's site. To use it, you simply need to get the ignition edge download/install script. Once you've downloaded the script, mark it as executable and run it. You may need superuser credentials in order to create the necessary directories. Go ahead and grab a coffee, this will take a few minutes to install.
 
 ```bash
 curl -o download-ignition-edge.sh https://raw.githubusercontent.com/tulsasoftware/reterminal-ignition-edge-panel/main/download-ignition-edge.sh
-sudo chmod +x ./download-ignition-edge.sh
-sudo ./download-ignition-edge.sh
+chmod +x ./download-ignition-edge.sh
+./download-ignition-edge.sh
 ```
 
 ### Uninstalling
@@ -74,28 +75,34 @@ If you wish to uninstall the package (as installed by the installer script), sim
 
 ```bash
 curl -o uninstall-ignition-edge.sh https://raw.githubusercontent.com/tulsasoftware/reterminal-ignition-edge-panel/main/uninstall-ignition-edge.sh
-sudo chmod +x ./uninstall-ignition-edge.sh
-sudo ./uninstall-ignition-edge.sh
+chmod +x ./uninstall-ignition-edge.sh
+./uninstall-ignition-edge.sh
 ```
 
-## Launching Ignition Edge Gateway
+## Launching Ignition Edge Gateway For The First Time
 
-When the installation is complete you will need to start the service. You can [setup the gateway to start on boot](#configuring-ignition-edge-to-launch-on-boot) and perform a reboot of the ReTerminal or you can choose to start the service manually.
+When the installation is complete you will need to start the service. You can [setup the gateway to start on boot](#launch-ignition-edge-gateway-on-boot) and perform a reboot of the reTerminal or you can choose to start the service manually.
 
  ```bash
-sudo /opt/ignitionedge/ignition.sh start
+/opt/ignitionedge/ignition.sh start
 ```
 
-You can easily check if the service is running if you are able to load the Ignition Edge license agreement page. Launch a web browser either on the ReTerminal itself at `localhost:8088` OR from another device on the network at `{reterminalhostname}:8088` OR from anywhere on the network with IP address of the ReTerminal itself at `{reterminalip}:8088`.
+:::tip
+You can easily check if the service is running if you are able to load the Ignition Edge Gateway's home page. 
+:::
+
+To load the gateway's home page, launch a web browser either on the reTerminal itself at `localhost:8088` OR from another device on the network at `{reterminalhostname}:8088` OR from anywhere on the network with the IP address of the reTerminal itself at `{reterminalip}:8088`
 
 ![ignition edge eula page](./ignition-edge-eula-screenshot.png)
 
-### Configuring Ignition Edge To Launch On Boot
+### Launch Ignition Edge Gateway On Boot
+:::note
 It is recommended to launch the gateway's service automatically on boot of the device. There are multiple ways this can be accomplished and it is ultimately up to the user to decide how to do this.
+:::
 
-As an example, you could add the launch command to your `.bashrc`. To do this, simply open your `.bashrc` in a text editor of your choice.
+One way to launch the service on boot is to add the launch command to your `.bashrc`. To do this, simply open your `.bashrc` in a text editor of your choice.
 ```bash
-sudo nano ~/.bashrc
+nano ~/.bashrc
 ```
 Append the launch command to the the file
 ```bash
@@ -105,13 +112,19 @@ Append the launch command to the the file
 And don't forget to save the file! 
 (`ctrl + x` in the example above using nano)
 
-This method does not launch the gateway on save, so reboot the ReTerminal to ensure the script works as expected.
+:::warning
+This method does not launch the gateway on save, so reboot the reTerminal to ensure the change works as expected.
+:::
 
 ## Configuring Ignition Edge
 
-Configuring the gateway is a straight forward process. Proceed by accepting the EULA and then create a default user / password for Ignition. Remember this information as it will be created with admin credentials and be used for system configuration throughout this series.
+Configuring the gateway is a straight-forward process. Proceed by accepting the EULA and then create a default user / password for Ignition. Remember this information as it will be created with admin credentials and be used for system configuration throughout this series.
 
 ![Create default user page](./ignition-edge-create-user.png)
+
+:::note
+Although Ignition Edge is configured by default to communicate to a master SCADA system, it is not required to use a SCADA server. Ignition Edge is a completely standalone product that is configured to easily tie into a SCADA network in the future if desired.
+:::
 
 After you have a user, you will be asked if you would like to change any of the default port configurations for the installation. I do not have a network with any conflicting ports, so I have chosen to accept the defaults. These ports will be used to communicate back to the primary SCADA installation, so if you are configuring to work with an existing installation Ignition, ensure that this page matches your expected values. Note that these are the core ports used for the application, but if you choose to install modules in the future you will likely have more ports to configure later.
 
